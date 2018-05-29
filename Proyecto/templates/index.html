@@ -1,0 +1,63 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+   PLAY2LEARN
+{% endblock %}
+{% block content %}
+<center>
+	<h1>WELCOME TO PLAY2LEARN!</h1>
+</center>
+
+<style type="text/css">
+	.card {
+
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+</style>
+<center>
+<div class="card bg-success text-white" style="width: 20rem;
+  height: 20rem;
+  position:absolute;
+  top:50%;
+  left:50%;
+  padding:10px;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+ ">	
+	<div class="card-body" style=" position:absolute;
+  top:50%;
+  left:50%;
+  padding:10px;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);">
+
+	
+	<form method="link" action="{{ url_for('login') }}">
+	<p><button type="submit" class="btn btn-danger btn-lg">
+		<span class="glyphicon glyphicon-star-empty"></span> Log In
+	</button></p>
+	</form>
+
+
+	
+	
+	</div>
+</div>
+</center>
+
+
+
+
+{% endblock %}
+

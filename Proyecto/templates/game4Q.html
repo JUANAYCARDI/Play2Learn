@@ -1,0 +1,119 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}
+GAME
+{% endblock %}
+
+{% block content %}
+
+<style type="text/css">
+  .card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+</style>
+
+<div class="card bg-success text-white" style="width: 45rem;
+  height: 40rem;
+  position:absolute;
+  top:50%;
+  left:50%;
+  padding:10px;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+ "> 
+ 
+  <div class="card-body" style=" position:absolute;
+  top:50%;
+  left:50%;
+  padding:0px;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);">
+
+  
+  <div id="pregunta"></div>
+  <div id="respuestas"></div>
+
+<input type="button" class="btn btn-success btn-df" value="Comprobar" onclick="comprobar()">
+  <script>
+    var cantRespuestas = 0
+    var preguntas = [
+    "¿Cuál de estos deportes se juega con balón?",
+    "¿Qué deporte se juega con las manos?",
+    '¿Dónde va a ser el mundial de Rusia?',
+    '¿De qué color es una cancha de fútbol?',
+    '¿Con qué se practica el boxeo?'
+    ];
+    
+    var respuestas = [
+    ['fútbol','natación','tennis','atletismo'],
+    ['baloncesto','fútbol','atletismo','ciclismo'],
+    ['Rusia','En televisión','En Internet','Brazil'],
+    ['verde','azul','rojo','amarillo'],
+    ['guantes','balón','medias','gafas']
+    ];
+jugar();
+
+    var index_respuesta_correcta;
+
+function jugar(){
+      var indice_aleatorio = Math.floor(Math.random()*preguntas.length);
+
+
+    var respuestas_posibles = respuestas[indice_aleatorio];
+
+
+    var posiciones = [0,1,2,3];
+    var respuestas_reordenadas = [];
+
+    var posIn = false;
+    for(i in respuestas_posibles){
+      var posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
+      if(posicion_aleatoria==0 && posIn == false){
+        index_respuesta_correcta =i;
+        posIn = true;
+      }
+      respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
+      posiciones.splice(posicion_aleatoria, 1);
+    }
+
+    var txt_respuestas="";
+    for(i in respuestas_reordenadas){
+      txt_respuestas += '<input type="radio" name="pp" value="'+i+'"><label>'+respuestas_reordenadas[i]+'</label><br>';
+    }
+
+    document.getElementById("respuestas").innerHTML = txt_respuestas;
+    document.getElementById("pregunta").innerHTML = preguntas[indice_aleatorio];
+
+}
+function comprobar(){
+  var respuesta = $("input[type=radio]:checked").val();
+  if(respuesta ==index_respuesta_correcta){
+    cantRespuestas+=1
+    if (cantRespuestas ==3) {
+          return (window.location.replace("/kinder"));
+    }
+    
+  }else{
+    alert("Incorrecto");
+  }
+  jugar();
+}
+  </script>
+  	
+  
+
+
+
+
+{% endblock %}
